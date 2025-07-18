@@ -1,9 +1,13 @@
 package com.cristofer.apirest.apirest.Entities;
 
+import org.hibernate.annotations.ManyToAny;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Usuarios {
@@ -14,9 +18,50 @@ public class Usuarios {
 
     private String nombre;
 
-    private String usuario;
+    private String apellido;
+
+    @Column(unique = true)
+    private String correo;
 
     private String password;
+
+    private String numero;
+
+    @ManyToAny
+    @JoinColumn(name = "rol_id")
+    private int rol_id;
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public int getRol_id() {
+        return rol_id;
+    }
+
+    public void setRol_id(int rol_id) {
+        this.rol_id = rol_id;
+    }
 
     public Long getId() {
         return id;
@@ -32,14 +77,6 @@ public class Usuarios {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
     }
 
     public String getPassword() {
