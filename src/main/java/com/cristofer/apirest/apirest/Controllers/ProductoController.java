@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cristofer.apirest.apirest.Entities.Producto;
 import com.cristofer.apirest.apirest.Repositories.ProductoRepository;
+import com.cristofer.apirest.apirest.dto.ProductoDTO;
+import com.cristofer.apirest.apirest.service.ProductoService;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +26,9 @@ public class ProductoController {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private ProductoService productoService;
 
     // obtener todos los productos
     @GetMapping
@@ -38,8 +45,9 @@ public class ProductoController {
 
     // crear un producto nuevo
     @PostMapping
-    public Producto crearProducto(@RequestBody Producto producto) {
-        return productoRepository.save(producto);
+    public ResponseEntity<Producto> crearProducto(@RequestBody ProductoDTO dto) {
+        Producto creado = productoService.crearProducto(dto);
+        return new ResponseEntity<>(creado, HttpStatus.CREATED);
     }
 
     // modificar un producto mediante id

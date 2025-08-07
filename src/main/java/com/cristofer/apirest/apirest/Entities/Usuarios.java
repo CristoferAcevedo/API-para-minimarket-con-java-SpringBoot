@@ -1,13 +1,12 @@
 package com.cristofer.apirest.apirest.Entities;
 
-import org.hibernate.annotations.ManyToAny;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Usuarios {
@@ -27,9 +26,11 @@ public class Usuarios {
 
     private String numero;
 
-    @ManyToAny
+    @ManyToOne
     @JoinColumn(name = "rol_id")
-    private int rol_id;
+    private ROl rol_id;
+
+    // Getters and Setters
 
     public String getApellido() {
         return apellido;
@@ -55,11 +56,11 @@ public class Usuarios {
         this.numero = numero;
     }
 
-    public int getRol_id() {
+    public ROl getRol_id() {
         return rol_id;
     }
 
-    public void setRol_id(int rol_id) {
+    public void setRol_id(ROl rol_id) {
         this.rol_id = rol_id;
     }
 

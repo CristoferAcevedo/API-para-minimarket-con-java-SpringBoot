@@ -1,13 +1,10 @@
 package com.cristofer.apirest.apirest.Entities;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class ROl {
@@ -19,7 +16,20 @@ public class ROl {
     @Column(unique = true)
     private String nombre;
 
-    // 🔗 RELACIÓN UNO A MUCHOS
-    @OneToMany(mappedBy = "rol")
-    private List<Usuarios> usuarios;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
 }
