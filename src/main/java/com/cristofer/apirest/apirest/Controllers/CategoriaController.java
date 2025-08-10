@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/api/v1/categorias")
 public class CategoriaController {
 
     @Autowired
