@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1")
 public class UsuariosController {
 
     @Autowired
     private UsuariosRepository usuariosRepository;
 
     // tomar los usuarios
-    @GetMapping
+    @GetMapping("/login")
     public List<Usuarios> GetUsuarios() {
         return usuariosRepository.findAll();
     }
 
     // crear un usuario
-    @PostMapping
+    @PostMapping("/register")
     public Usuarios crearUsuario(@RequestBody Usuarios usuario) {
         return usuariosRepository.save(usuario);
     }

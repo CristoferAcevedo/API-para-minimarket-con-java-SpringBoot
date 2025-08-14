@@ -46,7 +46,7 @@ public class ProductoService {
         // Obtener la categoría desde el ID
         Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
-        producto.setCategoria_id(categoria);
+        producto.setCategoria(categoria);
 
         return productoRepository.save(producto);
     }
@@ -64,7 +64,7 @@ public class ProductoService {
         Categoria categoria = categoriaRepository.findById(producto.getCategoriaId())
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
 
-        productoExistente.setCategoria_id(categoria);
+        productoExistente.setCategoria(categoria);
 
         return productoRepository.save(productoExistente);
     }

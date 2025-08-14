@@ -11,7 +11,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Producto {
 
@@ -41,71 +47,5 @@ public class Producto {
         UNIDAD,
         GRAMO
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public TipoPesaje getTipo_pesaje() {
-        return tipo_pesaje;
-    }
-
-    public void setTipo_pesaje(TipoPesaje tipo_pesaje) {
-        this.tipo_pesaje = tipo_pesaje;
-    }
-
-    public LocalDate getFecha_vencimiento() {
-        return fecha_vencimiento;
-    }
-
-    public void setFecha_vencimiento(LocalDate fecha_vencimiento) {
-        this.fecha_vencimiento = fecha_vencimiento;
-    }
-
-    public Double getIva() {
-        return iva;
-    }
-
-    public void setIva(Double iva) {
-        this.iva = iva;
-    }
-
-    public Categoria getCategoria_id() {
-        return categoria;
-    }
-
-    public void setCategoria_id(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    // getters and setters
 
 }
