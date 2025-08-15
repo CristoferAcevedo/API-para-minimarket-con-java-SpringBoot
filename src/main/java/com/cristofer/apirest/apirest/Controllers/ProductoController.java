@@ -7,6 +7,9 @@ import com.cristofer.apirest.apirest.Entities.Producto;
 import com.cristofer.apirest.apirest.dto.ProductoDTO;
 import com.cristofer.apirest.apirest.service.ProductoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +24,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/v1/productos")
+@Tag(name = "Productos", description = "Operaciones relacionadas con los productos")
 public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
 
     // obtener todos los productos
+    @Operation(summary = "Listar todos los productos")
     @GetMapping
     public ResponseEntity<List<Producto>> obteneProductos() {
         List<Producto> productos = productoService.obtenerTodosLosProductos();
@@ -34,6 +39,7 @@ public class ProductoController {
     }
 
     // obtener producto por id
+    @Operation(summary = "obtener producto por ID")
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerProductoPorId(@PathVariable Long id) {
         Producto producto = productoService.obtenerProductoPorId(id);
@@ -45,6 +51,7 @@ public class ProductoController {
     }
 
     // crear un producto nuevo
+    @Operation(summary = "crear un nuevo producto")
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@RequestBody ProductoDTO dto) {
         Producto creado = productoService.crearProducto(dto);
@@ -52,6 +59,7 @@ public class ProductoController {
     }
 
     // modificar un producto mediante id
+    @Operation(summary = "actualizar un producto mediante el id")
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @RequestBody ProductoDTO producto) {
         Producto actualizado = productoService.actualizarProducto(id, producto);
@@ -63,6 +71,7 @@ public class ProductoController {
     }
 
     // eliminar un producto mediante id
+    @Operation(summary = "eliminar un producto mediante el id")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
         try {
