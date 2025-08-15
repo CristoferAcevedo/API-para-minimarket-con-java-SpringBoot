@@ -1,7 +1,5 @@
 package com.cristofer.apirest.apirest.Auth;
 
-import com.cristofer.apirest.apirest.Entities.ROl;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +15,5 @@ public class RegistroRequest {
     private String correo;
     private String password;
     private String numero;
-    private ROl rolId;
+    private Long rolId;
 }

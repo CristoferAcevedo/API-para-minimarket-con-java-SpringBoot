@@ -10,8 +10,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -21,15 +19,9 @@ public class UsuariosController {
     private UsuariosRepository usuariosRepository;
 
     // tomar los usuarios
-    @GetMapping("/login")
+    @GetMapping()
     public List<Usuarios> GetUsuarios() {
         return usuariosRepository.findAll();
-    }
-
-    // crear un usuario
-    @PostMapping("/register")
-    public Usuarios crearUsuario(@RequestBody Usuarios usuario) {
-        return usuariosRepository.save(usuario);
     }
 
 }
