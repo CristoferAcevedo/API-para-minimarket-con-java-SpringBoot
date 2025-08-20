@@ -18,8 +18,4 @@ public class RolService {
         return rolRepository.findAll();
     }
 
-    public ROl createRol(ROl rol) {
-        return rolRepository.save(rol);
-    }
-
 }
