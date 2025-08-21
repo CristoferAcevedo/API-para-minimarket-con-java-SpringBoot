@@ -40,8 +40,6 @@ public class VentasService {
     // crear una venta
     public Ventas crearVenta(VentaDTO ventaDTO) {
 
-        System.out.println(ventaDTO);
-
         // Buscar cliente
         Usuarios cliente = usuariosRepository.findById(ventaDTO.getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado con id: " + ventaDTO.getClienteId()));
@@ -73,8 +71,6 @@ public class VentasService {
 
             detalleVentaRepository.save(detalleVenta);
         }
-
-        ventasRepository.save(ventaRealizada);
 
         return ventaRealizada;
     }

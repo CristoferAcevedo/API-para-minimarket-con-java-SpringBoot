@@ -35,8 +35,6 @@ public class VentasController {
     @Operation(summary = "crear una nueva venta")
     @PostMapping
     public ResponseEntity<Ventas> crearVenta(@RequestBody VentaDTO ventaDTO) {
-        System.out.println("VentaDTO recibida: " + ventaDTO.getFecha() + ", Cliente ID: " + ventaDTO.getClienteId()
-                + ", Detalles: " + ventaDTO.getDetalles());
         Ventas ventaCreada = ventasService.crearVenta(ventaDTO);
         if (ventaCreada == null) {
             return ResponseEntity.badRequest().build();
