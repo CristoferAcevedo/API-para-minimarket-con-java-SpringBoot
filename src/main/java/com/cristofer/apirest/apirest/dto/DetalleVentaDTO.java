@@ -9,16 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DetalleVentaDTO {
 
-    private Long id;
-
-    private Long ventaId;
-
     private Long productoId;
 
     private int cantidad;
-
-    private double subtotal;
-
-    private double total;
-
 }

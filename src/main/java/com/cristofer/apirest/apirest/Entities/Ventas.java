@@ -1,6 +1,6 @@
 package com.cristofer.apirest.apirest.Entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,5 +26,6 @@ public class Ventas {
     @JoinColumn(name = "vendedor")
     private Usuarios vendedor;
 
-    private Date fechaVenta;
+    private LocalDate fechaVenta;
+
 }

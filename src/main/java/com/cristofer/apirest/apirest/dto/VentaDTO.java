@@ -1,6 +1,6 @@
 package com.cristofer.apirest.apirest.dto;
 
-import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VentaDTO {
 
-    private Long id;
-
-    private Date fecha;
+    private String fecha;
 
     private Long clienteId;
+
+    private List<DetalleVentaDTO> detalles;
+
 }
