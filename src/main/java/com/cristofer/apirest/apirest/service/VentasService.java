@@ -1,6 +1,7 @@
 package com.cristofer.apirest.apirest.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import com.cristofer.apirest.apirest.Repositories.DetalleVentaRepository;
 import com.cristofer.apirest.apirest.Repositories.ProductoRepository;
 import com.cristofer.apirest.apirest.Repositories.UsuariosRepository;
 import com.cristofer.apirest.apirest.Repositories.VentasRepository;
+import com.cristofer.apirest.apirest.dto.DetalleResponseDTO;
 import com.cristofer.apirest.apirest.dto.DetalleVentaDTO;
 import com.cristofer.apirest.apirest.dto.VentaDTO;
+import com.cristofer.apirest.apirest.dto.VentaResponseDTO;
 
 @Service
 public class VentasService {
@@ -38,7 +41,7 @@ public class VentasService {
     }
 
     // crear una venta
-    public Ventas crearVenta(VentaDTO ventaDTO) {
+    public VentaResponseDTO crearVenta(VentaDTO ventaDTO) {
 
         // Buscar cliente
         Usuarios cliente = usuariosRepository.findById(ventaDTO.getClienteId())
@@ -52,6 +55,8 @@ public class VentasService {
         // Guardar primero la venta
         Ventas ventaRealizada = ventasRepository.save(venta);
 
+        List<DetalleResponseDTO> detallesResponse = new ArrayList<>();
+
         // Recorrer cada detalle de la venta
         for (DetalleVentaDTO detalleDTO : ventaDTO.getDetalles()) {
             Producto producto = productoRepository.findById(detalleDTO.getProductoId())
@@ -63,16 +68,30 @@ public class VentasService {
             detalleVenta.setProductoId(producto);
             detalleVenta.setCantidad(detalleDTO.getCantidad());
 
-            double subtotal = detalleDTO.getCantidad() * producto.getPrecio();
-            double total = subtotal * (1 + producto.getIva() / 100);
-
-            detalleVenta.setSubtotal(subtotal);
-            detalleVenta.setTotal(total);
+            detalleVenta.setSubtotal(detalleDTO.getSubtotal());
+            detalleVenta.setTotal(detalleDTO.getTotal());
 
             detalleVentaRepository.save(detalleVenta);
+
+            // Llenar el response del detalle
+            DetalleResponseDTO detalleResponse = new DetalleResponseDTO();
+            detalleResponse.setProductoId(producto.getId());
+            detalleResponse.setNombreProducto(producto.getNombre());
+            detalleResponse.setCantidad(detalleVenta.getCantidad());
+            detalleResponse.setSubtotal(detalleVenta.getSubtotal());
+            detalleResponse.setTotal(detalleVenta.getTotal());
+
+            detallesResponse.add(detalleResponse);
         }
 
-        return ventaRealizada;
+        // Construir el response de la venta
+        VentaResponseDTO ventaResponse = new VentaResponseDTO();
+        ventaResponse.setId(ventaRealizada.getId());
+        ventaResponse.setFecha(ventaRealizada.getFechaVenta().toString());
+        ventaResponse.setClienteId(cliente.getId());
+        ventaResponse.setDetalles(detallesResponse);
+
+        return ventaResponse;
     }
 
 }

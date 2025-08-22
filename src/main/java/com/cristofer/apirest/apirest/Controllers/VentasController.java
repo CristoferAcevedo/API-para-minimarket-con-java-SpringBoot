@@ -6,15 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cristofer.apirest.apirest.Entities.Ventas;
 import com.cristofer.apirest.apirest.dto.VentaDTO;
+import com.cristofer.apirest.apirest.dto.VentaResponseDTO;
 import com.cristofer.apirest.apirest.service.VentasService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -34,8 +35,8 @@ public class VentasController {
 
     @Operation(summary = "crear una nueva venta")
     @PostMapping
-    public ResponseEntity<Ventas> crearVenta(@RequestBody VentaDTO ventaDTO) {
-        Ventas ventaCreada = ventasService.crearVenta(ventaDTO);
+    public ResponseEntity<VentaResponseDTO> crearVenta(@RequestBody VentaDTO ventaDTO) {
+        VentaResponseDTO ventaCreada = ventasService.crearVenta(ventaDTO);
         if (ventaCreada == null) {
             return ResponseEntity.badRequest().build();
         }
