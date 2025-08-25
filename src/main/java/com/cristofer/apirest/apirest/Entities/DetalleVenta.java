@@ -30,7 +30,7 @@ public class DetalleVenta {
 
     private int cantidad;
 
-    private double subtotal;
+    private int subtotal;
 
-    private double total;
+    private int total;
 }

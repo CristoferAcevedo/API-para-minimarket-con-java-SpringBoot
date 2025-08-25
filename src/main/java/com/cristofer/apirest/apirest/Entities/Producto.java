@@ -28,7 +28,7 @@ public class Producto {
     @Column(unique = true)
     private String nombre;
 
-    private Double precio;
+    private int precio;
 
     private int cantidad;
 
@@ -37,7 +37,7 @@ public class Producto {
 
     private LocalDate fecha_vencimiento;
 
-    private Double iva;
+    private int iva;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")

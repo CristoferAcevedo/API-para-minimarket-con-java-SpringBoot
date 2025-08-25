@@ -12,6 +12,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.cristofer.apirest.apirest.Jwt.JwtAuthenticationFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -38,6 +40,31 @@ public class SecurityConfig {
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                                 .authenticationProvider(authProvider)
                                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                                // 👇 Manejo de errores centralizado para seguridad
+                                .exceptionHandling(ex -> ex
+                                                .authenticationEntryPoint((request, response, authException) -> {
+                                                        response.setContentType("application/json");
+                                                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                                                        response.getWriter()
+                                                                        .write("""
+                                                                                            {
+                                                                                                "error": "No autenticado",
+                                                                                                "detalle": "Debes iniciar sesión para acceder a este recurso."
+                                                                                            }
+                                                                                        """);
+                                                })
+                                                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                                                        response.setContentType("application/json");
+                                                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                                                        response.getWriter()
+                                                                        .write("""
+                                                                                            {
+                                                                                                "error": "Acceso denegado",
+                                                                                                "detalle": "No tienes permisos suficientes para acceder a este recurso."
+                                                                                            }
+                                                                                        """);
+                                                }))
+
                                 .build();
         }
 
