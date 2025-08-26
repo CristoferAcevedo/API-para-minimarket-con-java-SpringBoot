@@ -44,8 +44,8 @@ public class VentasService {
     public VentaResponseDTO crearVenta(VentaDTO ventaDTO) {
 
         // Buscar cliente
-        Usuarios cliente = usuariosRepository.findById(ventaDTO.getClienteId())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con id: " + ventaDTO.getClienteId()));
+        Usuarios cliente = usuariosRepository.findById(ventaDTO.getVendedorId())
+                .orElseThrow(() -> new RuntimeException("Vendedor no encontrado con id: " + ventaDTO.getVendedorId()));
 
         // Crear la venta
         Ventas venta = new Ventas();
@@ -88,7 +88,7 @@ public class VentasService {
         VentaResponseDTO ventaResponse = new VentaResponseDTO();
         ventaResponse.setId(ventaRealizada.getId());
         ventaResponse.setFecha(ventaRealizada.getFechaVenta().toString());
-        ventaResponse.setClienteId(cliente.getId());
+        ventaResponse.setVendedorId(cliente.getId());
         ventaResponse.setDetalles(detallesResponse);
 
         return ventaResponse;

@@ -18,8 +18,8 @@ public class VentaDTO {
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "La fecha debe estar en formato yyyy-MM-dd")
     private String fecha;
 
-    @NotNull(message = "El ID del cliente no puede estar vacío")
-    private Long clienteId;
+    @NotNull(message = "El ID del vendedor no puede estar vacío")
+    private Long vendedorId;
 
     @NotNull(message = "Los detalles de la venta no pueden estar vacíos")
     private List<DetalleVentaDTO> detalles;

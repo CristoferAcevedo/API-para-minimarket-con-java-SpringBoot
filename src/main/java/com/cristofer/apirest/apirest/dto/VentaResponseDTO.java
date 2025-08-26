@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class VentaResponseDTO {
     private Long id;
     private String fecha;
-    private Long clienteId;
+    private Long vendedorId;
     private List<DetalleResponseDTO> detalles;
 }

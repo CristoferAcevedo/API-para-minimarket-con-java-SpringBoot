@@ -11,6 +11,7 @@ import com.cristofer.apirest.apirest.service.AuthService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -23,14 +24,14 @@ public class AuthController {
     // tomar los usuarios
     @Operation(summary = "Iniciar sesión")
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> Login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> Login(@Valid @RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(authService.login(loginRequest));
     }
 
     // crear un usuario
     @Operation(summary = "Registrar un nuevo usuario")
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> Register(@RequestBody RegistroRequest registroRequest) {
+    public ResponseEntity<AuthResponse> Register(@Valid @RequestBody RegistroRequest registroRequest) {
         return ResponseEntity.ok(authService.register(registroRequest));
     }
 }
